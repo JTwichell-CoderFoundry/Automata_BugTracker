@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "UnauthorizedTicketEdit";
+}
+
+<h2>Unauthorized Ticket edit detected</h2>
+<br />
+<h3>The Ticket with title: '@ViewBag.TicketTitle' does not belong to you. Please get with your PM to discuss possible resolutions..</h3>
+<hr />
+@Html.ActionLink("Return To Dashboard", "Index", "Home")
+

@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Use language services to ignore unwanted language statistics
+Scripts/* linguist-vendored=false
+Content/* linguist-vendored=false
+assets/* linguist-vendored=false

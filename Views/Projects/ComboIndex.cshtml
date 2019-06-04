@@ -1,0 +1,86 @@
+﻿@model Automata_BugTracker.ViewModels.ProjectTicketsViewModel
+
+@{
+    ViewBag.Title = "ComboIndex";
+}
+
+<h2>Combo Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="DataTable" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Project")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var project in Model.Projects)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Description)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = project.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = project.Id })
+                                <br />
+                                @Html.ActionLink("Create Ticket", "Create", "Tickets", new { projectId = project.Id }, null)
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            @foreach (var ticket in Model.Tickets.OrderByDescending(t => t.Created))
+            {
+                <h4><span>Ticket Title: @ticket.Title</span></h4>
+                <h6><span>Ticket Created: @ticket.Created</span></h6>
+            }
+        </div>
+        <div class="col-md-6">
+            @foreach (var user in Model.Users)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayName("Name")
+                    </dt>
+
+                    <dd>
+                        <span>@Html.DisplayFor(model => user.LastName), @Html.DisplayFor(model => user.FirstName)</span>
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Email")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => user.Email)
+                    </dd>
+                </dl>
+            }           
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "Demo Login";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-3">
+        <section class="panel panel-group">
+            <header class="panel-heading bg-primary">
+
+                <div class="widget-profile-info">
+                    <div class="profile-picture">
+                        <img src="~/Avatar/androgenousPat.jpg">
+                    </div>
+                    <div class="profile-info">
+                        <h4 class="name text-semibold">John Doe</h4>
+                        <h5 class="role">Administrator</h5>
+                        <div class="profile-footer">
+                            <a href="#">(edit profile)</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </header>
+            <div id="accordion">
+                <div class="panel panel-accordion panel-accordion-first">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
+                                <i class="fa fa-check"></i> Tasks
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            @using (Html.BeginForm("DemoLogin", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("demoUser", "DemoAdmin")
+                                <button type="submit" class="btn btn-sm btn-primary">Login</button>
+                            }
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-3">
+
+        <section class="panel panel-group">
+            <header class="panel-heading bg-primary">
+
+                <div class="widget-profile-info">
+                    <div class="profile-picture">
+                        <img src="~/Avatar/androgenousPat.jpg">
+                    </div>
+                    <div class="profile-info">
+                        <h4 class="name text-semibold">John Doe</h4>
+                        <h5 class="role">Project Manager</h5>
+                        <div class="profile-footer">
+                            <a href="#">(edit profile)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <div id="accordion">
+                <div class="panel panel-accordion panel-accordion-first">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
+                                <i class="fa fa-check"></i> Tasks
+                            </a>
+                        </h4>
+                    </div>
+
+                </div>
+                <div class="panel panel-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            @using (Html.BeginForm("DemoLogin", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("demoUser", "DemoProjectManager")
+                                <button type="submit" class="btn btn-sm btn-primary">Login</button>
+                            }
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-3">
+
+        <section class="panel panel-group">
+            <header class="panel-heading bg-primary">
+
+                <div class="widget-profile-info">
+                    <div class="profile-picture">
+                        <img src="~/Avatar/androgenousPat.jpg">
+                    </div>
+                    <div class="profile-info">
+                        <h4 class="name text-semibold">John Doe</h4>
+                        <h5 class="role">Developer</h5>
+                        <div class="profile-footer">
+                            <a href="#">(edit profile)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <div id="accordion">
+                <div class="panel panel-accordion panel-accordion-first">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
+                                <i class="fa fa-check"></i> Tasks
+                            </a>
+                        </h4>
+                    </div>
+
+                </div>
+                <div class="panel panel-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            @using (Html.BeginForm("DemoLogin", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("demoUser", "DemoDeveloper")
+                                <button type="submit" class="btn btn-sm btn-primary">Login</button>
+                            }
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-3">
+
+        <section class="panel panel-group">
+            <header class="panel-heading bg-primary">
+
+                <div class="widget-profile-info">
+                    <div class="profile-picture">
+                        <img src="~/Avatar/androgenousPat.jpg">
+                    </div>
+                    <div class="profile-info">
+                        <h4 class="name text-semibold">John Doe</h4>
+                        <h5 class="role">Submitter</h5>
+                        <div class="profile-footer">
+                            <a href="#">(edit profile)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <div id="accordion">
+                <div class="panel panel-accordion panel-accordion-first">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
+                                <i class="fa fa-check"></i> Tasks
+                            </a>
+                        </h4>
+                    </div>
+
+                </div>
+                <div class="panel panel-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            @using (Html.BeginForm("DemoLogin", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("demoUser", "DemoSubmitter")
+                                <button type="submit" class="btn btn-sm btn-primary">Login</button>
+                            }
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+

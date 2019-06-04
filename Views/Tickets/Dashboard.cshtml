@@ -1,0 +1,289 @@
+﻿@using Automata_BugTracker.Helpers
+@model Automata_BugTracker.Models.Ticket
+
+@{
+    ViewBag.Title = "Ticket Dashboard";
+}
+
+<style>
+    .textArea{
+        min-width:100%;
+    }
+</style>
+
+
+<h2>@ViewBag.Title</h2>
+
+<!-- This is where I would begin laying out my Ticket Dashboard
+    1. Ticket information (i.e. Detail info)
+    2. Ticket Comments
+    3. Ticket Attachments
+    -------
+    4. Ticket Histories
+    5. Ticket Notifications
+-->
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Project")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Type")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Priority")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Status")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Developer")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Submitter")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>           
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Project.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TicketType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TicketPriority.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TicketStatus.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AssignedToUser.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.OwnerUser.FirstName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+                    </td>
+                </tr>
+               
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<hr style="height:5px; background-color:black">
+
+<div class="row">
+    <div class="col-md-4" style="border-right:5px solid black;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <span class="h3">
+                    <u>Ticket Comments</u>
+                    (@Model.TicketComments.Count())
+                </span>
+            </div>
+        </div>
+
+        <!-- This is where I will eventually create the form that allows Users to comment on the Ticket -->
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post, new { style = "min-height:190.3px;" }))
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.Hidden("TicketId", Model.Id)
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextArea("CommentBody", null, new { rows = 5, @class = "form-control textArea", placeholder = "Add comment" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10 text-left">
+                            <button style="margin-top:5px;" class="btn btn-sm btn-primary" type="submit">Add Comment</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <hr style="height:5px; background-color:black">
+        @{
+            var loop = 1;
+        }
+
+        @foreach (var comment in Model.TicketComments.OrderByDescending(t => t.Created))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse@(loop)">@comment.User.FullName</a>
+                                </h4>
+                            </div>
+                            <div id="collapse@(loop)" class="panel-collapse collapse">
+                                <div class="panel-body">@comment.CommentBody</div>
+                                <div class="panel-footer">@comment.Created</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            loop++;
+        }
+    </div>
+
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <span class="h3"><u>Ticket Attachments</u> (@Model.TicketAttachments.Count())</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("TicketId", Model.Id)
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextArea("AttachmentDescription", new { rows = 5, @class = "form-control textArea", placeholder = "Add Description" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input style="margin-top:5px;" type="file" name="attachment" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 text-left">
+                            <button style="margin-top:5px;" class="btn btn-sm btn-primary" type="submit">Add Attachment</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <hr style="height:5px; background-color:black">
+
+        @{ var index = 1;}
+        @foreach (var attachment in Model.TicketAttachments.OrderByDescending(t => t.Created))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#mycollapse@(index)">@attachment.User.FullName</a>
+                                </h4>
+                            </div>
+                            <div id="mycollapse@(index)" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a href=@Url.Content(attachment.FilePath) target="_blank">
+                                                <img src="@AttachmentHelper.DisplayImage(attachment.FilePath)" />
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            @attachment.AttachmentDescription
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">@attachment.Created</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            index++;
+        }
+    </div>
+
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <span class="h2"><u>Ticket Histories</u> (@Model.TicketHistories.Count())</span>
+            </div>
+        </div>
+
+        <hr style="height:5px; background-color:black">
+
+        @foreach (var history in Model.TicketHistories.OrderByDescending(t => t.ChangedDate))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#mycollapse@(index)">@history.User.FullName</a>
+                                </h4>
+                            </div>
+                            <div id="mycollapse@(index)" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @history.Property
+                                        </div>
+                                        <div class="col-md-4">
+                                            @history.OldValue
+                                        </div>
+                                        <div class="col-md-4">
+                                            @history.NewValue
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="panel-footer">@history.ChangedDate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            index++;
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

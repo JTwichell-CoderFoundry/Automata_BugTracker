@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section scripts{
+    <script>
+        //Step 1: Collect the data
+        var num1 = +$("#input1").val();
+        var num2 = +$("#input2").val();
+
+        //Step 2: Process the data
+        var output = FizzBuzz(num1, num2);    
+
+        //Step 3: Use the processed data
+        $("#output").text(output);
+
+        function FizzBuzz(num1, num2) {
+            for (var loop = 1, loop <= 100, loop++) {
+
+            }
+        }
+
+    </script>
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
